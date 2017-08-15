@@ -12,17 +12,55 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         -->
-    </head>
 
-    <body ng-app>
-
-        <!-- Add application content here -->
-        <p>This is a single-page app that tracks expenses</p>
-
+        <link rel="stylesheet" href="main.css">
 
         <!-- Add scripts here -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+        <script src="main.js"></script>
+    </head>
+
+    <body ng-app="expenseTrackerApp">
+
+        <!-- Add application content here -->
+        <div ng-controller="controller">
+        {{ title }}
+
+        <br>
+
+        <p>Filter the table: 
+        <input type="text" name="search" placeholder="Search" ng-model="searchTerm">
+        </p>
+
+        <form name="expenseForm" novalidate><table>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount (CAD)</th>
+            </tr>
+            <tr ng-repeat="x in expenses | filter : searchTerm">
+                <td>{{ x.date | date }}</td>
+                <td>{{ x.description }}</td>
+                <td>{{ x.amount | currency }}</td>
+            </tr>
+            <tr>
+                <td><input name="dateInput" type="date" placeholder="Date" ng-model="date" required=""></td>
+                <td><input name="descInput" type="text" placeholder="Description" ng-model="description" required=""></td>
+                <td><input name="amountInput" type="number" placeholder="Amount" ng-model="amount" required=""></td>
+                <td><input name="addBtn" type="submit" value="Add" ng-click="addExpense(date, description, amount)" 
+                ng-disabled="expenseForm.dateInput.$invalid || expenseForm.descInput.$invalid || expenseForm.amountInput.$invalid"></td>
+            </tr>
+        </table></form>
+
+        <p><span style="color:red" ng-show="expenseForm.dateInput.$dirty && expenseForm.dateInput.$invalid">Enter a valid date (YYYY-MM-DD)</span></p>
+        <p><span style="color:red" ng-show="expenseForm.descInput.$dirty && expenseForm.descInput.$invalid">A text description is required</span></p>
+        <p><span style="color:red" ng-show="expenseForm.amountInput.$dirty && expenseForm.amountInput.$invalid">Enter a valid $$ amount</span></p>
+
+
+
+        </div>
 
     </body>
 </html>
