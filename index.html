@@ -7,12 +7,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!--
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        -->
-
         <link rel="stylesheet" href="main.css">
 
         <!-- Add scripts here -->
@@ -26,8 +20,9 @@
     <body ng-app="expenseTrackerApp">
 
         <!-- Add application content here -->
-        <div ng-controller="controller">
-        {{ title }}
+        <div id="container" ng-controller="controller">
+        
+        <h1>My expenses</h1>
 
         <p>
             Filter the table: <input type="text" name="search" placeholder="Search" ng-model="searchTerm">

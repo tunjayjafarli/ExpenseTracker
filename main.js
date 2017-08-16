@@ -1,7 +1,6 @@
 var app = angular.module("expenseTrackerApp", ['ngStorage']);
 
 app.controller("controller", function($scope, $localStorage) {
-	$scope.title = "This is a list of your expenses"
 
 	// Sample data for display
 	var sampleData = [{date: "2017-07-26", description: "Chevron Gas", amount: "20.00"}, {date: "2017-07-26", description: "Starbucks", amount: "2.36"}];
