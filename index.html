@@ -31,7 +31,7 @@
 
         <p>
             Filter the table: <input type="text" name="search" placeholder="Search" ng-model="searchTerm">
-            Total expense: {{ total }}
+            Total expense: {{ total | currency }}
         </p>
         
 
@@ -40,17 +40,19 @@
                 <th>Date</th>
                 <th>Description</th>
                 <th>Amount (CAD)</th>
+                <th>Remove</th>
             </tr>
             <tr ng-repeat="x in expenses | filter : searchTerm">
                 <td>{{ x.date | date }}</td>
                 <td>{{ x.description }}</td>
                 <td>{{ x.amount | currency }}</td>
+                <td style="text-align:center"><span ng-click="removeExpense($index)">&times;</span></td>
             </tr>
             <tr>
                 <td><input name="dateInput" type="date" placeholder="Date" ng-model="date" required=""></td>
                 <td><input name="descInput" type="text" placeholder="Description" ng-model="description" required=""></td>
                 <td><input name="amountInput" type="number" placeholder="Amount" ng-model="amount" required=""></td>
-                <td><input name="addBtn" type="submit" value="Add" ng-click="addExpense(date, description, amount)" 
+                <td style="text-align:center"><input name="addBtn" type="submit" value="Add" ng-click="addExpense(date, description, amount)" 
                 ng-disabled="expenseForm.dateInput.$invalid || expenseForm.descInput.$invalid || expenseForm.amountInput.$invalid"></td>
             </tr>
         </table></form>
@@ -58,8 +60,6 @@
         <p><span style="color:red" ng-show="expenseForm.dateInput.$dirty && expenseForm.dateInput.$invalid">Enter a valid date (YYYY-MM-DD)</span></p>
         <p><span style="color:red" ng-show="expenseForm.descInput.$dirty && expenseForm.descInput.$invalid">A text description is required</span></p>
         <p><span style="color:red" ng-show="expenseForm.amountInput.$dirty && expenseForm.amountInput.$invalid">Enter a valid $$ amount</span></p>
-
-
 
         </div>
 
